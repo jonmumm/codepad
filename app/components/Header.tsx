@@ -15,12 +15,14 @@ export default async function Header() {
         <Link href="/">
           <h1 className="font-medium my-2">chatinterview.dev</h1>
         </Link>
-        {user && (
+        {user ? (
           <div className="flex gap-2 items-center">
             <Avatar username={user.username} image={user.image ?? null} />
             <span>Hi {user.username}!</span>
             <Signout />
           </div>
+        ) : (
+          <Link href="/api/auth/signin/github">Login</Link>
         )}
       </nav>
     </header>

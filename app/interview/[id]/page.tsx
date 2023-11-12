@@ -1,4 +1,17 @@
+import { Textarea } from "@/components/ui/textarea";
+import { kv } from "@vercel/kv";
+import { z } from "zod";
+import { Timer } from "./timer";
+
+const InterviewSchema = z.object({
+  id: z.string(),
+  instructions: z.string(),
+});
+
 export default async function Page({ params }: { params: { id: string } }) {
+  const interview = InterviewSchema.parse(
+    await kv.hgetall(`interview:${params.id}`)
+  );
   return (
     <>
       <h1 className="">Jon&apos;s Interview</h1>
@@ -10,6 +23,7 @@ export default async function Page({ params }: { params: { id: string } }) {
         <h2 className="block text-gray-700 text-xl font-bold mb-2">
           Instructions
         </h2>
+        <p>{interview.instructions}</p>
         <ul className="list-decimal list-inside text-gray-600">
           <li>Read the prompt carefully to understand the task at hand.</li>
           <li>
@@ -28,7 +42,9 @@ export default async function Page({ params }: { params: { id: string } }) {
             Once completed, be prepared to present and explain your solution.
           </li>
         </ul>
+        <Textarea />
       </div>
+      <Timer />
     </>
   );
 }

@@ -10,7 +10,7 @@ if (!GITHUB_CLIENT_ID) {
 }
 
 if (!GITHUB_SECRET) {
-  throw new Error("GITHUB_CLIENT_SECRET not defined in environment");
+  throw new Error("GITHUB_SECRET not defined in environment");
 }
 
 export const authOptions: NextAuthOptions = {
