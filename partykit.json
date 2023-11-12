@@ -1,6 +1,6 @@
 {
   "main": "party/main.ts",
-  "name": "partykit-nextjs-chat-template",
+  "name": "chatinterview",
   "compatibilityDate": "2023-10-13",
   "parties": {
     "ai": "party/ai.ts",
