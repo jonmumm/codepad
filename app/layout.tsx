@@ -8,7 +8,7 @@ import Footer from "./components/Footer";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "PartyKit Template",
+  title: "chat.interview.dev",
   description: "Example of using PartyKit with Next.js",
 };
 
@@ -25,7 +25,9 @@ export default function RootLayout({
             className="flex flex-col justify-between relative"
             style={{ minHeight: "100dvh" }}
           >
-            <Header />
+            <Header>
+              <></>
+            </Header>
             <div className="flex-grow p-4 sm:p-6">
               <div className="max-w-7xl m-auto w-full flex flex-col justify-start items-start">
                 {children}

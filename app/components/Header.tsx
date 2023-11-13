@@ -1,9 +1,9 @@
-import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import type { User } from "@/party/utils/auth";
+import { getServerSession } from "next-auth";
 import Link from "next/link";
-import Signout from "./Signout";
 import Avatar from "./Avatar";
+import Signout from "./Signout";
 
 export default async function Header() {
   const session = await getServerSession(authOptions);

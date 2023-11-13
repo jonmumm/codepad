@@ -1,13 +1,19 @@
-import { Textarea } from "@/components/ui/textarea";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { ClipboardCopyIcon } from "@radix-ui/react-icons";
 import { kv } from "@vercel/kv";
 import { z } from "zod";
-import Editor from "./editor";
+import { Chat } from "./chat/components";
 import { Timer } from "./timer";
-import { Label } from "@/components/ui/label";
-import { Badge } from "@/components/ui/badge";
-import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { ClipboardCopyIcon } from "@radix-ui/react-icons";
+import { headers } from "next/headers";
+import { Editor } from "./editor/components";
 
 const InterviewSchema = z.object({
   id: z.string(),
@@ -15,6 +21,7 @@ const InterviewSchema = z.object({
 });
 
 export default async function Page({ params }: { params: { id: string } }) {
+  const host = headers().get("host")!;
   const interview = InterviewSchema.parse(
     await kv.hgetall(`interview:${params.id}`)
   );
@@ -22,22 +29,27 @@ export default async function Page({ params }: { params: { id: string } }) {
     <>
       <h1 className="">Jon&apos;s Interview</h1>
       <div>Copy this url</div>
-      <Card className="px-3 py-2">
-        <code>
-          https://{process.env.NEXT_PUBLIC_CHATINTERVIEW_HOST}/interview/
-          {params.id}
-        </code>
-        <Button>
-          Copy
-          <ClipboardCopyIcon />
-        </Button>
-      </Card>
+      <Card className="px-3 py-2"></Card>
       <Card>
-        <Label>Participants</Label>
-        <div className="flex flex-row gap-1">
-          <Badge>Jon</Badge>
-          <Badge>Nick</Badge>
-        </div>
+        <CardHeader>
+          <CardTitle>Participants</CardTitle>
+          <div className="flex flex-row gap-1">
+            <Badge>Jon</Badge>
+            <Badge>Nick</Badge>
+          </div>
+        </CardHeader>
+        <CardContent>
+          <div>
+            <code className="border rounded-md px-3 py-2">
+              https://{host}/interview/{params.id}
+            </code>
+            <Button>
+              Copy
+              <ClipboardCopyIcon />
+            </Button>
+          </div>
+        </CardContent>
+        <CardFooter></CardFooter>
       </Card>
       <div className="flex flex-row gap-2 w-full">
         <div className="flex-1">
@@ -66,12 +78,14 @@ export default async function Page({ params }: { params: { id: string } }) {
                 solution.
               </li>
             </ul>
-            <Textarea />
           </div>
+          <Card>
+            <Chat interviewId={params.id} />
+          </Card>
         </div>
         <div className="flex-1">
           <h2 className="font-bold">Editor</h2>
-          <div style={{ height: "85vh" }}>
+          <div style={{ height: "40vh" }}>
             <Editor />;
           </div>
         </div>
