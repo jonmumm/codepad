@@ -3,6 +3,11 @@ import { kv } from "@vercel/kv";
 import { z } from "zod";
 import Editor from "./editor";
 import { Timer } from "./timer";
+import { Label } from "@/components/ui/label";
+import { Badge } from "@/components/ui/badge";
+import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { ClipboardCopyIcon } from "@radix-ui/react-icons";
 
 const InterviewSchema = z.object({
   id: z.string(),
@@ -17,9 +22,23 @@ export default async function Page({ params }: { params: { id: string } }) {
     <>
       <h1 className="">Jon&apos;s Interview</h1>
       <div>Copy this url</div>
-      <pre>
-        {process.env.NEXT_PUBLIC_CHATINTERVIEW_HOST}/interview/{params.id}
-      </pre>
+      <Card className="px-3 py-2">
+        <code>
+          https://{process.env.NEXT_PUBLIC_CHATINTERVIEW_HOST}/interview/
+          {params.id}
+        </code>
+        <Button>
+          Copy
+          <ClipboardCopyIcon />
+        </Button>
+      </Card>
+      <Card>
+        <Label>Participants</Label>
+        <div className="flex flex-row gap-1">
+          <Badge>Jon</Badge>
+          <Badge>Nick</Badge>
+        </div>
+      </Card>
       <div className="flex flex-row gap-2 w-full">
         <div className="flex-1">
           <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
