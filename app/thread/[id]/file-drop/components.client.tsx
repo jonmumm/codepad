@@ -71,7 +71,7 @@ export const FileDropCard = () => {
       </div>
       <CardContent>
         <div
-          className={`border-dashed border-2 border-gray-300 p-5 flex min-h-[15vh] items-center justify-center`}
+          className={`border-dashed border-2 border-gray-300 p-5 flex items-center justify-center`}
         >
           <input {...getInputProps()} />
           {isDragActive ? (

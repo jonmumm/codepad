@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import Dropzone from "react-dropzone";
 import {
   Card,
   CardContent,
@@ -31,19 +30,13 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import { Separator } from "@/components/ui/separator";
 import { assert } from "@/lib/utils";
 import { User } from "@/party/utils/auth";
-import {
-  FileEditIcon,
-  SendHorizontalIcon,
-  Users2Icon,
-  WrenchIcon,
-} from "lucide-react";
+import { FileEditIcon, SendHorizontalIcon, Users2Icon } from "lucide-react";
 import { getServerSession } from "next-auth";
 import { getThread } from "../requests";
 import { Share } from "./components.client";
-import { Separator } from "@/components/ui/separator";
-import { Input } from "@/components/ui/input";
 import { FileDropCard } from "./file-drop";
 
 export default async function Page({ params }: { params: { id: string } }) {
@@ -61,8 +54,8 @@ export default async function Page({ params }: { params: { id: string } }) {
           <Share host={headers().get("host")!} id={params.id} />
         </div>
       </Card>
-      <div className="grid grid-cols-2 gap-1">
-        <Card>
+      <div className="grid gap-1 sm:grid-cols-2">
+        <Card className="flex flex-col">
           <CardHeader className="flex flex-row gap-1">
             <div className="flex-1">
               <CardTitle>Chat</CardTitle>
@@ -90,7 +83,7 @@ export default async function Page({ params }: { params: { id: string } }) {
             </Popover>
           </CardHeader>
           <Separator />
-          <ScrollArea className="flex-1 h-[50vh]">
+          <ScrollArea className="flex-1">
             <CardContent className="pt-5">
               <Card>
                 <Collapsible defaultOpen>
@@ -115,19 +108,21 @@ export default async function Page({ params }: { params: { id: string } }) {
           </ScrollArea>
 
           <Separator />
-          <Command shouldFilter={false}>
-            <CommandInput placeholder="Type something..."></CommandInput>
-            <CommandNotEmpty>
-              <CommandGroup>
-                <CommandList>
-                  <CommandItem className="flex items-center justify-center">
-                    Send
-                    <SendHorizontalIcon size={18} />
-                  </CommandItem>
-                </CommandList>
-              </CommandGroup>
-            </CommandNotEmpty>
-          </Command>
+          <div>
+            <Command shouldFilter={false}>
+              <CommandInput placeholder="Type something..."></CommandInput>
+              <CommandNotEmpty>
+                <CommandGroup>
+                  <CommandList>
+                    <CommandItem className="flex items-center justify-center">
+                      Send
+                      <SendHorizontalIcon size={18} />
+                    </CommandItem>
+                  </CommandList>
+                </CommandGroup>
+              </CommandNotEmpty>
+            </Command>
+          </div>
         </Card>
         <Card>
           <CardHeader>

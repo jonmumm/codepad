@@ -24,8 +24,10 @@ export const Share = ({ host, id }: { id: string; host: string }) => {
 
   return (
     <div className="flex flex-row gap-2 items-center p-2 justify-end">
-      <ShareIcon />
-      <code className="border rounded-md px-3 py-2">
+      <Button size="icon" variant="ghost">
+        <ShareIcon />
+      </Button>
+      <code className="border rounded-md px-3 py-2 truncate">
         https://{host}/thread/{id}
       </code>
 
