@@ -2,7 +2,6 @@ import { z } from "zod";
 
 export const PublicConfigSchema = z.object({
   NEXT_PUBLIC_PARTYKIT_HOST: z.string(),
-  NEXT_PUBLIC_CHATINTERVIEW_HOST: z.string(),
   NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: z.string(),
 });
 

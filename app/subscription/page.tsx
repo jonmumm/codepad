@@ -5,11 +5,8 @@ import { headers } from "next/headers";
 
 import Stripe from "stripe";
 
-const {
-  NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,
-  STRIPE_SECRET_KEY,
-  NEXT_PUBLIC_CHATINTERVIEW_HOST,
-} = ConfigSchema.parse(process.env);
+const { NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY, STRIPE_SECRET_KEY } =
+  ConfigSchema.parse(process.env);
 
 const stripe = new Stripe(STRIPE_SECRET_KEY);
 
