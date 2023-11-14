@@ -81,8 +81,8 @@ export const Editor = ({ interviewId }: { interviewId: string }) => {
       value={value}
       // height="100%"
       // maxHeight="100%"
-      // width="100%"
-      // maxWidth="100%"
+      width="100%"
+      maxWidth="100%"
       extensions={[
         basicSetup(),
         javascript(),

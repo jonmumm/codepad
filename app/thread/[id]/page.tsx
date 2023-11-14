@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import Dropzone from "react-dropzone";
 import {
   Card,
   CardContent,
@@ -32,12 +33,18 @@ import {
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { assert } from "@/lib/utils";
 import { User } from "@/party/utils/auth";
-import { SendHorizontalIcon, Users2Icon } from "lucide-react";
+import {
+  FileEditIcon,
+  SendHorizontalIcon,
+  Users2Icon,
+  WrenchIcon,
+} from "lucide-react";
 import { getServerSession } from "next-auth";
 import { getThread } from "../requests";
 import { Share } from "./components.client";
 import { Separator } from "@/components/ui/separator";
 import { Input } from "@/components/ui/input";
+import { FileDrop } from "./file-drop";
 
 export default async function Page({ params }: { params: { id: string } }) {
   const thread = await getThread(params.id);
@@ -83,22 +90,29 @@ export default async function Page({ params }: { params: { id: string } }) {
             </Popover>
           </CardHeader>
           <Separator />
-          <CardContent className="pt-5">
-            <Card>
-              <Collapsible defaultOpen>
-                <CollapsibleTrigger asChild>
-                  <CardHeader className="flex flex-row justify-between items-center">
-                    <CardTitle className="uppercase text-xs text-muted-foreground">
-                      System
-                    </CardTitle>
-                  </CardHeader>
-                </CollapsibleTrigger>
-                <CollapsibleContent>
-                  <CardContent>{thread.systemPrompt}</CardContent>
-                </CollapsibleContent>
-              </Collapsible>
-            </Card>
-          </CardContent>
+          <ScrollArea className="flex-1 h-[50vh]">
+            <CardContent className="pt-5">
+              <Card>
+                <Collapsible defaultOpen>
+                  <CollapsibleTrigger asChild>
+                    <CardHeader className="flex flex-row justify-between items-center py-2">
+                      <CardTitle className="uppercase text-xs text-muted-foreground">
+                        System
+                      </CardTitle>
+                      <Button size="icon" variant="ghost">
+                        <FileEditIcon />
+                      </Button>
+                    </CardHeader>
+                  </CollapsibleTrigger>
+                  <CollapsibleContent>
+                    <CardContent>{thread.systemPrompt}</CardContent>
+                  </CollapsibleContent>
+                </Collapsible>
+              </Card>
+              <div>Other messages</div>
+            </CardContent>
+            <ScrollBar />
+          </ScrollArea>
 
           <Separator />
           <Command shouldFilter={false}>
@@ -135,8 +149,9 @@ export default async function Page({ params }: { params: { id: string } }) {
             The AI will have access to images and files here.
           </CardDescription>
         </CardHeader>
-        <CardContent className="p-0 flex-1 flex items-center justify-center">
-          <div id="drop-area">Drop files or paste images here</div>
+        <CardContent className="p-0 flex-1 flex flex-col items-center justify-center">
+          <FileDrop />
+          {/* <div id="drop-area">Drop files or paste images here</div> */}
         </CardContent>
       </Card>
     </div>

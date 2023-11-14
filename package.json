@@ -63,6 +63,7 @@
     "random-word-slugs": "^0.1.7",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-dropzone": "^14.2.3",
     "react-hook-form": "^7.48.2",
     "stripe": "^14.4.0",
     "tailwind-merge": "^2.0.0",
