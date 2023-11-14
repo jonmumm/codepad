@@ -20,7 +20,7 @@ export const Share = ({ host, id }: { id: string; host: string }) => {
     setTimeout(() => {
       setShowCopied(false);
     }, 3000);
-  }, [setShowCopied]);
+  }, [setShowCopied, host, id]);
 
   const CopyButton = () => (
     <Button size="lg" variant="outline">
