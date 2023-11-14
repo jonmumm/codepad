@@ -84,7 +84,7 @@ export default async function Page({ params }: { params: { id: string } }) {
                 <CollapsibleTrigger asChild>
                   <CardHeader className="flex flex-row justify-between items-center">
                     <CardTitle className="uppercase text-xs text-muted-foreground">
-                      Context
+                      System
                     </CardTitle>
                   </CardHeader>
                 </CollapsibleTrigger>
@@ -110,7 +110,10 @@ export default async function Page({ params }: { params: { id: string } }) {
       </div>
       <Card className="flex flex-1">
         <CardHeader>
-          <CardTitle></CardTitle>
+          <CardTitle>Context</CardTitle>
+          <CardDescription>
+            The AI will have access to images and files here.
+          </CardDescription>
         </CardHeader>
         <div className="flex-1 flex items-center justify-center">
           <div id="drop-area">Drop files or paste images here</div>

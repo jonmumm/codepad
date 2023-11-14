@@ -1,18 +1,9 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import type { User } from "@/party/utils/auth";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@radix-ui/react-dropdown-menu";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
 import Avatar from "../Avatar";
 import Signout from "../Signout";
-import { NavDropdown } from "./components.client";
 
 export async function Header() {
   const session = await getServerSession(authOptions);
