@@ -77,11 +77,12 @@ export const Editor = ({ interviewId }: { interviewId: string }) => {
 
   return (
     <CodeMirror
+      className="flex flex-1"
       value={value}
-      minHeight="50vh"
-      maxHeight="70vh"
-      width="100%"
-      maxWidth="100%"
+      // height="100%"
+      // maxHeight="100%"
+      // width="100%"
+      // maxWidth="100%"
       extensions={[
         basicSetup(),
         javascript(),

@@ -7,4 +7,5 @@ export const CreateThreadPropsSchema = z.object({
 
 export const GetThreadResponseSchema = z.object({
   id: z.string(),
+  systemPrompt: z.string(),
 });

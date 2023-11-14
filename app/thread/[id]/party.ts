@@ -2,6 +2,7 @@ import { json, notFound, ok } from "@/party/utils/response";
 import type * as Party from "partykit/server";
 import { CreateThreadPropsSchema } from "../schema";
 import { GetThreadProps } from "../types";
+import { assert } from "@/lib/utils";
 
 // import { EditorDAO, ThreadCreatePropsSchema } from "./lib";
 // import { User } from "./utils/auth";
@@ -136,7 +137,11 @@ export default class ThreadServer implements Party.Server {
     // return list of messages for server rendering pages
     if (request.method === "GET") {
       if (await this.party.storage.get("id")) {
-        return json<GetThreadProps>({ id });
+        const systemPrompt = await this.party.storage.get<string>(
+          "systemPrompt"
+        );
+        assert(systemPrompt, "expected systemPrompt when fetching thread");
+        return json<GetThreadProps>({ id, systemPrompt });
       }
       return notFound();
     }
