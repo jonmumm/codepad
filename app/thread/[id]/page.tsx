@@ -30,10 +30,6 @@ import { ShareIcon } from "lucide-react";
 import { Share } from "./components.client";
 
 export default async function Page({ params }: { params: { id: string } }) {
-  const host = headers().get("host")!;
-
-  console.log("hi");
-  console.log({ host });
   const thread = getThread(params.id);
   assert(thread, "expected thread");
 

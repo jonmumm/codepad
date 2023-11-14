@@ -4,12 +4,12 @@ import { ShareIcon } from "lucide-react";
 
 export const Share = ({ host, id }: { id: string; host: string }) => {
   return (
-    <div className="flex flex-row gap-1 items-center py-2 items-center justify-center">
+    <div className="flex flex-row gap-2 items-center p-2 justify-end">
       <ShareIcon />
       <code className="border rounded-md px-3 py-2">
         http://{host}/thread/{id}
       </code>
-      <Button>
+      <Button size="lg" variant="outline">
         Copy
         <ClipboardCopyIcon />
       </Button>
