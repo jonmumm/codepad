@@ -1,7 +1,7 @@
 import { kv } from "@vercel/kv";
 import { nanoid } from "nanoid";
 import { redirect } from "next/navigation";
-import NewForm, { FormProps } from "./form";
+import NewForm, { FormProps } from "./components";
 import { Timer } from "../interview/[id]/timer";
 
 export default async function Page() {

@@ -9,9 +9,9 @@ import Link from "next/link";
 import RoomMessage from "./components/RoomMessage";
 import ConnectionStatus from "@/app/components/ConnectionStatus";
 
-const identify = async (socket: PartySocket) => {
+const identify = async (room: string, socket: PartySocket) => {
   // the ./auth route will authenticate the connection to the partykit room
-  const url = `${window.location.pathname}/auth?_pk=${socket._pk}`;
+  const url = `/chat/${room}/auth?_pk=${socket._pk}`;
   const req = await fetch(url, { method: "POST" });
 
   if (!req.ok) {
@@ -38,7 +38,7 @@ export const Room: React.FC<{
     onOpen(e) {
       // identify user upon connection
       if (session.status === "authenticated" && e.target) {
-        identify(e.target as PartySocket);
+        identify(room, e.target as PartySocket);
         if (session?.data?.user) setUser(session.data.user as User);
       }
     },
@@ -64,9 +64,9 @@ export const Room: React.FC<{
       session.status === "authenticated" &&
       socket?.readyState === socket.OPEN
     ) {
-      identify(socket);
+      identify(room, socket);
     }
-  }, [session.status, socket]);
+  }, [room, session.status, socket]);
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();

@@ -14,13 +14,16 @@ const nextConfig = {
   images: {
     domains: ["localhost", "avatars.githubusercontent.com", "pbs.twimg.com"],
   },
+  publicRuntimeConfig: {
+    NEXT_PUBLIC_PARTYKIT_HOST: process.env.NEXT_PUBLIC_PARTYKIT_HOST,
+  },
   rewrites: async () => [
     {
       // forward room authentication request to partykit
       source: "/chat/:roomId/auth",
       // include connection id in the query
       has: [{ type: "query", key: "_pk", value: "(?<pk>.*)" }],
-      destination: PARTYKIT_URL + "/parties/chatroom/:roomId/auth?_pk=:pk",
+      destination: PARTYKIT_URL + "/parties/chat/:roomId/auth?_pk=:pk",
     },
   ],
 };

@@ -18,6 +18,11 @@ export type BroadcastMessage = {
   type: "new" | "edit";
 } & Message;
 
+export type SyncEditor = {
+  type: "sync";
+  value: string;
+};
+
 export type SyncMessage = {
   type: "sync";
   messages: Message[];

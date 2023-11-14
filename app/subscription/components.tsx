@@ -16,7 +16,6 @@ export const Checkout = ({
 }) => {
   const stripe = useMemo(() => loadStripe(publishableKey), [publishableKey]);
 
-  console.log({ clientSecret, publishableKey });
   return (
     <div id="checkout">
       {clientSecret && (

@@ -43,14 +43,15 @@ export default class AIServer implements Party.Server {
     if (!this.party.env.OPENAI_API_KEY) return error("OPENAI_API_KEY not set");
 
     // open a websocket connection to the chatroom with the given id
-    const chatRoom = this.party.context.parties.chatroom.get(roomId);
-    const socket = await chatRoom.socket("/?_pk=" + botId);
+    const chat = this.party.context.parties.chat.get(roomId);
+    const socket = await chat.socket("/?_pk=" + botId);
 
     // simulate an user in the chatroom
     this.simulateUser(socket);
 
     return ok();
   }
+
   // act as a user in the room
   simulateUser(socket: Party.Connection["socket"]) {
     let messages: Message[] = [];

@@ -1,9 +1,11 @@
 {
   "main": "party/main.ts",
-  "name": "chatinterview",
+  "name": "codepad",
   "compatibilityDate": "2023-10-13",
   "parties": {
     "ai": "party/ai.ts",
+    "editor": "party/editor.ts",
+    "chat": "party/chat.ts",
     "chatroom": "party/chatRoom.ts",
     "chatrooms": "party/chatRooms.ts",
     "cursors": "party/cursors.ts"
