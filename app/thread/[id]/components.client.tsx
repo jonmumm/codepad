@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/popover";
 import { ClipboardCopyIcon } from "@radix-ui/react-icons";
 import { ShareIcon } from "lucide-react";
-import { forwardRef, useCallback, useState } from "react";
+import { useCallback, useState } from "react";
 
 export const Share = ({ host, id }: { id: string; host: string }) => {
   const [showCopied, setShowCopied] = useState(false);
@@ -22,14 +22,6 @@ export const Share = ({ host, id }: { id: string; host: string }) => {
     }, 3000);
   }, [setShowCopied, host, id]);
 
-  const CopyButton = forwardRef(() => (
-    <Button size="lg" variant="outline">
-      Copy
-      <ClipboardCopyIcon />
-    </Button>
-  ));
-  CopyButton.displayName = "CopyButton";
-
   return (
     <div className="flex flex-row gap-2 items-center p-2 justify-end">
       <ShareIcon />
@@ -39,7 +31,10 @@ export const Share = ({ host, id }: { id: string; host: string }) => {
 
       <Popover open={showCopied} onOpenChange={handlePressCopy}>
         <PopoverTrigger disabled={showCopied} asChild>
-          <CopyButton />
+          <Button size="lg" variant="outline">
+            Copy
+            <ClipboardCopyIcon />
+          </Button>
         </PopoverTrigger>
         <PopoverContent className="w-fit">Copied!</PopoverContent>
       </Popover>

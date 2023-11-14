@@ -50,48 +50,52 @@ export function NewThreadForm({
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <div className="flex flex-row gap-1 w-full">
-          <FormField
-            control={form.control}
-            name="systemPrompt"
-            render={({ field }) => {
-              return (
-                <FormItem className="flex-1">
-                  <FormLabel>Instructions</FormLabel>
-                  <FormControl>
-                    <Textarea className="w-full" {...field} />
-                  </FormControl>
-                  <FormDescription>
-                    Give instructions for the candidate.
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              );
-            }}
-          />
-          <FormField
-            control={form.control}
-            name="code"
-            render={({ field }) => {
-              return (
-                <FormItem className="flex-1">
-                  <FormLabel>Code</FormLabel>
-                  <FormControl>
-                    <CodeMirror {...field} />
-                  </FormControl>
-                  <FormDescription>
-                    Set up any sample code here...
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              );
-            }}
-          />
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="grid grid-cols-2 gap-4 space-y-8"
+      >
+        <FormField
+          control={form.control}
+          name="systemPrompt"
+          render={({ field }) => {
+            return (
+              <FormItem className="flex-1">
+                <FormLabel>System Prompt</FormLabel>
+                <FormControl>
+                  <Textarea className="w-full" {...field} />
+                </FormControl>
+                <FormDescription>
+                  The AI will have this prompt as context for the thread.
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            );
+          }}
+        />
+        <FormField
+          control={form.control}
+          name="code"
+          render={({ field }) => {
+            return (
+              <FormItem className="flex-1">
+                <FormLabel>Code</FormLabel>
+                <FormControl>
+                  <CodeMirror {...field} />
+                </FormControl>
+                <FormDescription>
+                  The AI will have this code as context for the thread. Changes
+                  to the code will automatically be logged and persisted.
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            );
+          }}
+        />
+        <div className="col-span-2">
+          <Button className="w-full" type="submit">
+            Create New Thread
+          </Button>
         </div>
-        <Button className="w-full" type="submit">
-          Create New Thread
-        </Button>
       </form>
     </Form>
   );
