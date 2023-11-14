@@ -13,3 +13,5 @@ export function assert<T>(
     throw new Error(errorMessage);
   }
 }
+
+export function noop() {}
