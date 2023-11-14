@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
+  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
@@ -56,6 +57,9 @@ export default async function Page({ params }: { params: { id: string } }) {
           <Card className="flex-1">
             <CardHeader>
               <CardTitle>Editor</CardTitle>
+              <CardDescription>
+                This code is shared as context with the AI.
+              </CardDescription>
             </CardHeader>
             <Editor interviewId={params.id} />
           </Card>

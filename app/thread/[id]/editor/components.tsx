@@ -15,6 +15,7 @@ import * as Y from "yjs";
 
 import getConfig from "next/config";
 import { useCallback, useState } from "react";
+import { PARTYKIT_HOST } from "@/app/env";
 
 console.log(getConfig());
 
@@ -67,7 +68,7 @@ export const Editor = ({ interviewId }: { interviewId: string }) => {
   }, []);
 
   const provider = useYProvider({
-    host: "localhost:1999",
+    host: PARTYKIT_HOST,
     room: interviewId,
     party: "editor",
     doc: yDoc,
