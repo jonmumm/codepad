@@ -19,8 +19,10 @@ import {
   Command,
   CommandEmpty,
   CommandGroup,
+  CommandInput,
   CommandItem,
   CommandList,
+  CommandNotEmpty,
 } from "@/components/ui/command";
 import {
   Popover,
@@ -30,10 +32,12 @@ import {
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { assert } from "@/lib/utils";
 import { User } from "@/party/utils/auth";
-import { Users2Icon } from "lucide-react";
+import { SendHorizontalIcon, Users2Icon } from "lucide-react";
 import { getServerSession } from "next-auth";
 import { getThread } from "../requests";
 import { Share } from "./components.client";
+import { Separator } from "@/components/ui/separator";
+import { Input } from "@/components/ui/input";
 
 export default async function Page({ params }: { params: { id: string } }) {
   const thread = await getThread(params.id);
@@ -78,7 +82,8 @@ export default async function Page({ params }: { params: { id: string } }) {
               </PopoverContent>
             </Popover>
           </CardHeader>
-          <CardContent>
+          <Separator />
+          <CardContent className="pt-5">
             <Card>
               <Collapsible defaultOpen>
                 <CollapsibleTrigger asChild>
@@ -94,6 +99,21 @@ export default async function Page({ params }: { params: { id: string } }) {
               </Collapsible>
             </Card>
           </CardContent>
+
+          <Separator />
+          <Command shouldFilter={false}>
+            <CommandInput placeholder="Type something..."></CommandInput>
+            <CommandNotEmpty>
+              <CommandGroup>
+                <CommandList>
+                  <CommandItem className="flex items-center justify-center">
+                    Send
+                    <SendHorizontalIcon size={18} />
+                  </CommandItem>
+                </CommandList>
+              </CommandGroup>
+            </CommandNotEmpty>
+          </Command>
         </Card>
         <Card>
           <CardHeader>
