@@ -108,16 +108,16 @@ export default async function Page({ params }: { params: { id: string } }) {
           </ScrollArea>
         </Card>
       </div>
-      <Card className="flex flex-1">
+      <Card className="flex-1 flex flex-col">
         <CardHeader>
           <CardTitle>Context</CardTitle>
           <CardDescription>
             The AI will have access to images and files here.
           </CardDescription>
         </CardHeader>
-        <div className="flex-1 flex items-center justify-center">
+        <CardContent className="p-0 flex-1 flex items-center justify-center">
           <div id="drop-area">Drop files or paste images here</div>
-        </div>
+        </CardContent>
       </Card>
     </div>
   );
