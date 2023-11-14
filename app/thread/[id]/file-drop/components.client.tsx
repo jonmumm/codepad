@@ -1,9 +1,17 @@
 "use client";
 
-import React, { useCallback, useEffect, useState } from "react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import Image from "next/image";
+import { useCallback, useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
 
-export const FileDrop = () => {
+export const FileDropCard = () => {
   const [imageURLs, setImageURLs] = useState<string[]>([]);
 
   const handleFilePaste = useCallback((files: File[]) => {
@@ -27,7 +35,7 @@ export const FileDrop = () => {
         file.type.startsWith("image/")
       );
       const imageUrls = imageFiles.map((file) => URL.createObjectURL(file));
-      setImageURLs(imageUrls);
+      setImageURLs((prevImageURLs) => [...prevImageURLs, ...imageUrls]);
       // Do something with the files
     },
     [setImageURLs]
@@ -36,21 +44,14 @@ export const FileDrop = () => {
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
   return (
-    <div>
-      <div
-        {...getRootProps()}
-        className="border-dashed border-2 border-gray-300 p-4 m-4"
-      >
-        <FilePasteListener onFilePasted={handleFilePaste} />
-        <input {...getInputProps()} />
-        {isDragActive ? (
-          <p className="text-gray-600">Drop the files here ...</p>
-        ) : (
-          <p className="text-gray-600">
-            Drag 'n' drop some files here, or click to select files
-          </p>
-        )}
-      </div>
+    <Card className="flex-1 flex flex-col" {...getRootProps()}>
+      <FilePasteListener onFilePasted={handleFilePaste} />
+      <CardHeader>
+        <CardTitle>Context</CardTitle>
+        <CardDescription>
+          The AI will have access to images and files here.
+        </CardDescription>
+      </CardHeader>
       <div className="flex flex-wrap">
         {imageURLs.map((url, index) => (
           <div key={index} className="relative m-4">
@@ -68,7 +69,21 @@ export const FileDrop = () => {
           </div>
         ))}
       </div>
-    </div>
+      <CardContent>
+        <div
+          className={`border-dashed border-2 border-gray-300 p-5 flex min-h-[15vh] items-center justify-center`}
+        >
+          <input {...getInputProps()} />
+          {isDragActive ? (
+            <p className="text-gray-600">Drop the files here ...</p>
+          ) : (
+            <p className="text-gray-600">
+              Drag &apos;n&apos; drop some files here, or click to select files
+            </p>
+          )}
+        </div>
+      </CardContent>
+    </Card>
   );
 };
 

@@ -44,7 +44,7 @@ import { getThread } from "../requests";
 import { Share } from "./components.client";
 import { Separator } from "@/components/ui/separator";
 import { Input } from "@/components/ui/input";
-import { FileDrop } from "./file-drop";
+import { FileDropCard } from "./file-drop";
 
 export default async function Page({ params }: { params: { id: string } }) {
   const thread = await getThread(params.id);
@@ -142,18 +142,8 @@ export default async function Page({ params }: { params: { id: string } }) {
           </ScrollArea>
         </Card>
       </div>
-      <Card className="flex-1 flex flex-col">
-        <CardHeader>
-          <CardTitle>Context</CardTitle>
-          <CardDescription>
-            The AI will have access to images and files here.
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="p-0 flex-1 flex flex-col items-center justify-center">
-          <FileDrop />
-          {/* <div id="drop-area">Drop files or paste images here</div> */}
-        </CardContent>
-      </Card>
+      <FileDropCard />
+      {/* <div id="drop-area">Drop files or paste images here</div> */}
     </div>
   );
 }
