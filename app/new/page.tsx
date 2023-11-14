@@ -1,25 +1,20 @@
-import { kv } from "@vercel/kv";
+import { ThreadDAO } from "@/party/lib";
 import { nanoid } from "nanoid";
 import { redirect } from "next/navigation";
-import NewForm, { FormProps } from "./components";
-import { Timer } from "../interview/[id]/timer";
+import { FormProps, NewForm } from "./components";
 
 export default async function Page() {
-  const createInterview = async (values: FormProps) => {
+  const submit = async (values: FormProps) => {
     "use server";
 
     const id = nanoid();
-    await kv.hset(`interview:${id}`, {
-      id,
-      instructions: values.instructions,
-    });
-
-    redirect(`/interview/${id}`);
+    await ThreadDAO.create(id, values);
+    redirect(`/thread/${id}`);
   };
 
   return (
     <section className="w-full">
-      <NewForm createInterview={createInterview} />
+      <NewForm submit={submit} />
     </section>
   );
 }

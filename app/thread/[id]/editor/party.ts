@@ -2,11 +2,11 @@ import type * as Party from "partykit/server";
 import { onConnect } from "y-partykit";
 import * as Y from "yjs";
 
-import { z } from "zod";
-import { SyncEditor } from "./utils/message";
-import { json, ok } from "./utils/response";
-import { EditorCreatePropsSchema } from "./lib";
 import { assert } from "@/lib/utils";
+import { SyncEditor } from "@/party/utils/message";
+import { json, ok } from "@/party/utils/response";
+import { z } from "zod";
+import { CreateEditorPropsSchema } from "./schema";
 
 export default class EditorServer implements Party.Server {
   constructor(public party: Party.Party) {}
@@ -37,7 +37,9 @@ export default class EditorServer implements Party.Server {
   async onRequest(req: Party.Request) {
     if (req.method === "POST") {
       // await req.json();
-      const { code: initialCode } = EditorCreatePropsSchema.parse(await req.json());
+      const { code: initialCode } = CreateEditorPropsSchema.parse(
+        await req.json()
+      );
       this.party.storage.put("initialCode", initialCode);
       return ok();
     } else {

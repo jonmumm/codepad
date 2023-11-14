@@ -4,7 +4,8 @@
   "compatibilityDate": "2023-10-13",
   "parties": {
     "ai": "party/ai.ts",
-    "editor": "party/editor.ts",
+    "editor": "app/thread/[id]/editor/party.ts",
+    "thread": "app/thread/[id]/party.ts",
     "chat": "party/chat.ts",
     "chatroom": "party/chatRoom.ts",
     "chatrooms": "party/chatRooms.ts",

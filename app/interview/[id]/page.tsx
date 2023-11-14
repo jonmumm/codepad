@@ -15,14 +15,13 @@ import {
 } from "@/components/ui/collapsible";
 import { Label } from "@/components/ui/label";
 import { ClipboardCopyIcon } from "@radix-ui/react-icons";
-import { kv } from "@vercel/kv";
 import { headers } from "next/headers";
 import { z } from "zod";
 import { Chat } from "./chat/components";
 import { Editor } from "./editor/components";
 
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import { ChatParty } from "@/party/lib";
+import { assert } from "@/lib/utils";
 import { User } from "@/party/utils/auth";
 import { getServerSession } from "next-auth";
 
@@ -33,14 +32,9 @@ const InterviewSchema = z.object({
 
 export default async function Page({ params }: { params: { id: string } }) {
   const host = headers().get("host")!;
-  const interview = InterviewSchema.parse(
-    await kv.hgetall(`interview:${params.id}`)
-  );
 
-  const chat = await ChatParty.get(params.id);
-  if (!chat) {
-    await ChatParty.create(params.id);
-  }
+  // const chat = await ChatDAO.get(params.id);
+  // assert(chat, "expected chat");
 
   const session = await getServerSession(authOptions);
   const user = session?.user as User | null;
@@ -81,7 +75,7 @@ export default async function Page({ params }: { params: { id: string } }) {
             </CardContent>
             <CardContent>
               <h3>Prompt</h3>
-              <p>{interview.instructions}</p>
+              {/* <p>{interview.instructions}</p> */}
             </CardContent>
             {/* <CardContent>
               <Timer />
@@ -114,11 +108,11 @@ export default async function Page({ params }: { params: { id: string } }) {
       </Card>
       <div className="flex flex-row gap-2 w-full">
         <Card className="flex-1">
-          <Chat
+          {/* <Chat
             initialUser={user}
             initialMessages={chat.messages}
             interviewId={params.id}
-          />
+          /> */}
         </Card>
         <Card className="flex-1">
           <CardHeader>

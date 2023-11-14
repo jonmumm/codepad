@@ -1,6 +1,5 @@
 "use client";
 
-import CodeMirror from "@uiw/react-codemirror";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -14,15 +13,18 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { ThreadCreatePropsSchema } from "@/party/lib";
 import { zodResolver } from "@hookform/resolvers/zod";
+import CodeMirror from "@uiw/react-codemirror";
 import { useCallback, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { Card, CardDescription, CardHeader } from "@/components/ui/card";
 
-const formSchema = ThreadCreatePropsSchema;
+const formSchema = z.object({
+  systemPrompt: z.string(),
+  code: z.string(),
+});
 export type FormProps = z.infer<typeof formSchema>;
 
-export function NewForm({
+export function NewThreadForm({
   submit,
 }: {
   submit: (values: FormProps) => Promise<void>;
@@ -45,7 +47,6 @@ export function NewForm({
     },
     [submit, startTransition]
   );
-  console.log("hi");
 
   return (
     <Form {...form}>
